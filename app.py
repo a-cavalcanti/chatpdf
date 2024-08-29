@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import text, embeddings
+from utils import embeddings_bedrock, text
 from streamlit_chat import message
 
 
@@ -31,8 +31,8 @@ def main():
                 # Processar os PDFs
                 raw_text = text.get_text_files(pdf_docs)
                 text_chunks = text.get_text_chunks(raw_text)
-                vectorstore = embeddings.get_vector_store_aws(text_chunks)
-                st.session_state.conversation = embeddings.create_conversation_chain_aws(vectorstore)
+                vectorstore = embeddings_bedrock.get_vector_store(text_chunks)
+                st.session_state.conversation = embeddings_bedrock.create_conversation_chain(vectorstore)
                 
                 st.success("Done")
         

@@ -1,18 +1,11 @@
-from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_community.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain_aws import ChatBedrock
-from langchain_aws import BedrockEmbeddings
+from langchain_aws.embeddings import BedrockEmbeddings
 
 
-def get_vector_store(chuncks):
-    embeddings = OpenAIEmbeddings()
-    vectorstore = FAISS.from_texts(texts=chuncks, embedding=embeddings)
-    return vectorstore
-
-def get_vector_store_aws(chuncks):    
+def get_vector_store(chuncks):    
     embeddings = BedrockEmbeddings(
         credentials_profile_name="bedrock", region_name="us-east-1"
     )
@@ -20,19 +13,6 @@ def get_vector_store_aws(chuncks):
     return vectorstore
 
 def create_conversation_chain(vectorstore):
-    llm = ChatOpenAI(temperature=0.0)
-    
-    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-    
-    conversation = ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        retriever=vectorstore.as_retriever(),
-        memory=memory
-    )
-    
-    return conversation
-
-def create_conversation_chain_aws(vectorstore):
     
     llm = ChatBedrock(
         region_name = "us-east-1",
