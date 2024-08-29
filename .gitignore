@@ -1,0 +1,74 @@
+# Arquivos de bytecode do Python
+__pycache__/
+*.py[cod]
+
+# Arquivos de pacotes
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.waf-*
+
+# Ambientes virtuais
+venv/
+ENV/
+env/
+.venv
+.venv/
+
+# Spyder configurações de projeto
+.spyderproject
+.spyproject
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Arquivos de configuração do ambiente
+.env
+.env.local
+
+# Arquivos de log
+*.log
+nohup.out
+
+# Arquivos de banco de dados
+*.sqlite
+
+# Diretórios de node (Node.js)
+node_modules/
+
+# Diretórios e arquivos de build
+bin/
+obj/
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.sdf
+*.cache
+*.csproj.user
+*.vbproj.user
+
+# Arquivos e diretórios de backup
+*.bak
+*.tmp
+*~
+*.swp
+
+# Arquivos e pastas do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Outros arquivos e diretórios que podem conter informações sensíveis
+secrets.yml
+credentials.xml
+
+# Terraform
+*.tfvars
+.terraform*

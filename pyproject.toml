@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "chatpdf"
+version = "0.1.0"
+description = "Chat PDF"
+authors = ["a-cavalcanti <a-cavalcanti@github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.10.12"
+streamlit = "^1.38.0"
+python-dotenv = "1.0.0"
+langchain = "^0.2.15"
+pypdf2 = "^3.0.1"
+faiss-cpu = "^1.8.0.post1"
+openai = "^1.42.0"
+tiktoken = "^0.7.0"
+streamlit-chat = "^0.1.1"
+langchain-community = "^0.2.14"
+langchain-aws = "^0.1.17"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
