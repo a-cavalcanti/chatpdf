@@ -1,10 +1,17 @@
 import streamlit as st
-from utils import text, embeddings
+from utils import text, embeddings_factory
+from utils.embeddings_factory import EmbeddingsFactory
 from streamlit_chat import message
+from dotenv import load_dotenv
 
 
 def main():
-        
+    
+    load_dotenv()
+    
+    provider = "openai"    
+    embeddings = EmbeddingsFactory.get_embeddings(provider)
+
     st.set_page_config(page_title="ChatPDF", page_icon=":books:", layout="wide")
     
     st.header("ChatPDF")
@@ -31,12 +38,10 @@ def main():
                 # Processar os PDFs
                 raw_text = text.get_text_files(pdf_docs)
                 text_chunks = text.get_text_chunks(raw_text)
-                vectorstore = embeddings.get_vector_store_aws(text_chunks)
-                st.session_state.conversation = embeddings.create_conversation_chain_aws(vectorstore)
+                vectorstore = embeddings.get_vector_store(text_chunks)
+                st.session_state.conversation = embeddings.create_conversation_chain(vectorstore)
                 
                 st.success("Done")
         
 if __name__ == '__main__':
     main()
-    
-    
