@@ -6,16 +6,16 @@ from langchain_aws import ChatBedrock
 from langchain_aws import BedrockEmbeddings
 
 
-class BedrockEmbeddings(BaseEmbeddings):
+class EmbeddingsBedrock(BaseEmbeddings):
 
-    def get_vector_store(chuncks):    
-        embeddings = BedrockEmbeddings(
+    def get_vector_store(self, chuncks):    
+        embeddings = EmbeddingsBedrock(
             credentials_profile_name="bedrock", region_name="us-east-1"
         )
         vectorstore = FAISS.from_texts(texts=chuncks, embedding=embeddings)
         return vectorstore
 
-    def create_conversation_chain(vectorstore):
+    def create_conversation_chain(self, vectorstore):
         
         llm = ChatBedrock(
             region_name = "us-east-1",

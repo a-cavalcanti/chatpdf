@@ -6,13 +6,25 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
 
-class OpenAIEmbeddings(BaseEmbeddings):
-    def get_vector_store(chuncks):
+class EmbeddingsOpenAI(BaseEmbeddings):
+
+    def load_vector_store(self):
+        embeddings = OpenAIEmbeddings()
+        vectorstore = FAISS.load_local('faiss_openai', embeddings)
+        return vectorstore
+    
+    def get_vector_store(self, chuncks):
         embeddings = OpenAIEmbeddings()
         vectorstore = FAISS.from_texts(texts=chuncks, embedding=embeddings)
+        vectorstore.save_local('faiss_openai')
         return vectorstore
 
-    def create_conversation_chain(vectorstore):
+    def create_conversation_chain(self, vectorstore=None):
+
+        if not vectorstore:
+            embeddings = OpenAIEmbeddings()
+            vectorstore = FAISS.load_local('faiss_openai', embeddings)
+        
         llm = ChatOpenAI(temperature=0.0)
         
         memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)

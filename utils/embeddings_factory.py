@@ -1,16 +1,16 @@
-from embeddings_huggingface import HuggingFaceEmbeddings
-from embeddings_openai import OpenAIEmbeddings
-from embeddings_bedrock import BedrockEmbeddings
+from utils.embeddings_huggingface import EmbeddingsHuggingFace
+from utils.embeddings_openai import EmbeddingsOpenAI
+from utils.embeddings_bedrock import EmbeddingsBedrock
 
 class EmbeddingsFactory:
     
     @staticmethod
     def get_embeddings(provider: str):
         if provider == 'huggingface':
-            return HuggingFaceEmbeddings()
+            return EmbeddingsHuggingFace()
         elif provider == 'openai':
-            return OpenAIEmbeddings()
+            return EmbeddingsOpenAI()
         elif provider == 'bedrock':
-            return BedrockEmbeddings()
+            return EmbeddingsBedrock()
         else:
             raise ValueError(f"Provider {provider} não é suportado.")
